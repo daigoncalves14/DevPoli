@@ -7,27 +7,27 @@
 
 import Foundation
 
+func kmLitre (km: Int) -> (KmLitre: Int, FullTank: Int, Travel300: Int, FillTimesTank450: Double, FullTankValue: Double, Travel450Value: Double) {
+    
+    let travelLiter: Int = km
+    let tank: Int = 45
+    let gasValue: Double = 5.72
+    
+    let travelFullTank: Int = travelLiter * tank
+    
+    let travel300Km: Int = 300 / travelLiter
+    
+    var fillFullTank: Double = 450 / Double(travelLiter) / Double(tank)
+    fillFullTank = fillFullTank.rounded(.awayFromZero)
+    
+    let fillTankValue: Double = gasValue * Double(tank)
+    
+    let travel450Km: Double = 450 / Double(travelLiter) * gasValue
+    
+    return (travelLiter, travelFullTank, travel300Km, fillFullTank, fillTankValue, travel450Km)
+}
 
-let tank: Int = 45
-let gasValue: Double = 5.72
-let travelLiter: Int = 8
-print("O carro percorre \(travelLiter) quilometros com o litro de gasolina.")
-
-let travelFullTank: Int = travelLiter * tank
-print("O carro percorre \(travelFullTank) quilometros com o tanque cheio.")
-
-let travel300Km: Int = 300 / travelLiter
-print("O carro consome \(travel300Km) litros numa viagem de 300 quilometros.")
-
-let fillFullTank: Double = 450 / Double(travelLiter) / Double(tank)
-print("O carro precisa encher o tanque \(Int(fillFullTank.rounded(.awayFromZero))) vezes para percorrer 450 quilometros.")
-
-let fillTankValue: Double = gasValue * Double(tank)
-print("Custa \(fillTankValue) reais para encher o tanque com gasolina.")
-
-let travel450Km: Double = 450 / Double(travelLiter) * gasValue
-print("Custa \(travel450Km) reais para um viagem de 450 quilometros.")
-
-
+var result = kmLitre(km: 8)
+print(result)
 
 
