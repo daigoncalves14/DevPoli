@@ -7,30 +7,38 @@
 
 import Foundation
 
-func calculateAverageAgeFor () {
-    let agesList: [Int] = [13, 32, 30, 29, 18, 51, 40, 79, 17]
 
-    let under18List = agesList.filter{$0 <= 18}.filter{$0 < 40}
-    let under18 = under18List.sum()
-    print(under18 / under18List.count)
-    
-    let over18List = agesList.filter{$0 > 18}.filter{$0 <= 40}
-    let over18 = over18List.sum()
-    print(over18 / over18List.count)
-    
-    let over40List = agesList.filter{$0 > 41}
-    let over40 = over40List.sum()
-    print(over40 / over40List.count)
-    
-    let sumAllAges = agesList.sum()
-    print(sumAllAges / agesList.count)
+
+
+
+
+
+
+
+
+
+var agesList: [Int] = [13, 32, 30, 29, 18, 51, 40, 79, 17]
+
+func calculateAverageAgeFor (ageListFilter:[Int] = agesList, underAgeVar: Int, overAgeVar: Int) {
+    var ageListFilter: [Int] = []
+    ageListFilter = agesList.filter{$0 <= underAgeVar}.filter{$0 >= overAgeVar}
+    let averageAge = ageListFilter.reduce(0,+) / ageListFilter.count
+    print(averageAge)
 }
+calculateAverageAgeFor(underAgeVar: 18, overAgeVar: 0)
+calculateAverageAgeFor(underAgeVar: 40, overAgeVar: 19)
+calculateAverageAgeFor(underAgeVar: 100, overAgeVar: 41)
+calculateAverageAgeFor(underAgeVar: 100, overAgeVar: 0)
 
-calculateAverageAgeFor()
 
-extension Sequence where Element: AdditiveArithmetic {
-    func sum() -> Element {reduce(.zero, +)}
-}
+
+
+//extension Sequence where Element: AdditiveArithmetic {
+//    func sum() -> Element {reduce(.zero, +)}
+//}
+
+
+
 
 //func calculateAverageAgeFor1 () {
 //
