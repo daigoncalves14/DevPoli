@@ -8,29 +8,30 @@
 import Foundation
 
 func compactarNumero(valor: Int) -> String {
-    var valueString :String = String(valor)
+    let valueString :String = String(valor)
     var secNumber = ""
     
-    if valueString.count >= 0 && valueString.count <= 3 {
-        return valueString
+    switch valueString.count {
+        case 1:
+            secNumber = ""
+        default:
+        let secondNumber = valueString[valueString.index(after: valueString.startIndex)]
+            secNumber = ".\(String(secondNumber))"
     }
-    
-    var secondNumber = valueString[valueString.index(after: valueString.startIndex)]
-    
-    if secondNumber != "0" {
-        secNumber = ".\(String(secondNumber))"
-    }
-    if valueString.count == 4 {
+
+    switch valueString.count {
+    case 4:
         let valueResult = (Int(valueString) ?? 0) / 1000
         return "\(String(valueResult))\(secNumber)k"
-    }
-    if valueString.count == 7 {
+    case 7:
         let valueResult = (Int(valueString) ?? 0) / 1000000
         return "\(String(valueResult))\(secNumber)M"
+    default:
+        return valueString
     }
-    return "Vazio"
 }
 
+print(compactarNumero(valor: 1)) // 50
 print(compactarNumero(valor: 50)) // 50
 print(compactarNumero(valor: 876)) // 876
 print(compactarNumero(valor: 1000)) // 1k
