@@ -13,17 +13,19 @@ func checkPassword(password: String) -> Bool {
     var hasNumber = false
     var hasSpecialCharacter = true
     var hasConsecutiveNumbers = true
-    var consecutiveNumbers = 0
+    var previousNumber = -1
+    var previousPreviousNumber = -1
     
     for (index, char) in password.enumerated() {
         if char >= "0" && char <= "9" {
             hasNumber = true
-            consecutiveNumbers += 1
-            if consecutiveNumbers == 3 {
+            if previousPreviousNumber + 1 == previousNumber && previousNumber + 1 == Int(String(char)) {
                 hasConsecutiveNumbers = false
+                break
             }
+            previousPreviousNumber = previousNumber
+            previousNumber = Int(String(char)) ?? 0
         } else {
-            consecutiveNumbers = 0
             if index == 0 && char.isUppercase {
                 hasUpperCase = true
             } else if char >= "a" && char <= "z" {
@@ -37,7 +39,7 @@ func checkPassword(password: String) -> Bool {
 }
 
 
-let pass = "S0c0rr0"
+let pass = "S125p"
 if checkPassword(password: pass) {
     print("Senha forte")
 }else{
